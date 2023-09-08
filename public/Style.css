@@ -1,0 +1,434 @@
+
+html, body
+{
+  height: 100%;
+
+  color: #ffffff;
+  background-color: #232323;
+  /*background-image: linear-gradient(90deg, #232323 33.3%, #262626 33.33%, #262626 66.22%, #232323 66.22% );*/
+  width: 100%;
+  margin: 0px; padding: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+}
+h1
+{
+  font-family: "Abril Fatface";
+}
+h2
+{
+  font-family: "Abril Fatface";
+}
+h3
+{
+  font-family: "Abril Fatface";
+}
+h4
+{
+  font-family: "Abril Fatface";
+}
+p
+{
+  font-family: "Raleway", "sans-serif";
+}
+a
+{
+  color: #ffffff;
+  text-decoration: none;
+}
+.a
+{
+  font-family: "Raleway", "sans-serif";
+  color: #ffffff;
+  text-decoration: none;
+}
+ul
+{
+  font-family: "Raleway", "sans-serif";
+
+}
+
+section
+{
+  max-width: 1280px;
+}
+.AboutLIPos1{
+  position: relative;
+  top: 50%; right: 160%;
+}
+.AboutLIPos2{
+  position: relative;
+  top: 50%; right: 100%;
+}
+
+.Assets
+{
+  font-weight: 700;
+
+  color: 	#EA3829FF;
+}
+
+.ButtonText
+{
+  font-size: 30px;
+  font-family: "Abril Fatface", serif;
+  display: none;
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  position: relative;
+  bottom: 53%; left: 43%;
+  margin-bottom: -200px;
+  margin-right: 600px;
+  cursor: pointer;
+
+}
+/* Project Text down */
+.DownABit
+{
+  position: relative;
+  top: 5%;
+  padding: 25px 25px 25px 25px;
+}
+
+/* Project Image Right and down */
+.DownRABit
+{
+  position: relative;
+  top: 5%;
+  right: -23%;
+  padding: 25px 25px 25px 25px;
+}
+.DownRABit2
+{
+  position: relative;
+  top: 5%;
+  right: 5%;
+  padding: 25px 25px 25px 25px;
+}
+/* Project Text Explanation */
+.ExplanationText
+{
+
+  padding: 0px 25px 0px 25px;
+}
+.Footer
+{
+  position: relative;
+  top: 80%;
+  background-color: #151515;
+
+}
+.Home_Section
+{
+  padding: 200px 0px;
+}
+/* label for Project images*/
+.ImageLabel
+{
+  position: relative;
+  left: 50%;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: #ad1717;
+}
+.ImageLabel2
+{
+  position: relative;
+  left: 44%;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: #ad1717;
+}
+.ProjectExEnd
+{
+  padding: 5px 0px 500px 25px
+}
+.ImgScale
+{
+
+ width: inherit;
+ height: inherit;
+ position: relative;
+ left: 49%;
+}
+/*setting max scale of project image*/
+.ImgScaleMax
+{
+  max-width:  700px;
+  max-height: 700px;
+
+}
+.ImgScaleMax2
+{
+  max-width:  1500px;
+  max-height: 1500px;
+}
+
+.IncreaseFontS
+{
+  font-size: 3rem;
+  color: white;
+}
+.IncreaseFontS2
+{
+  font-size: 3rem;
+  color: white;
+  position: relative;
+  right: 19%;
+}
+.NavText
+{
+
+}
+.IncreaseFontS:hover
+{
+  color: 	#BE0403FF;
+  transition: color 1s;
+}
+.IncreaseFontS2:hover
+{
+  color: 	#BE0403FF;
+  transition: color 1s;
+}
+
+
+.navbar
+{
+  right: -700px;
+}
+.Navigation
+{
+  position: relative;
+  top: 45%; left: 43%;
+  width: fit-content; height: fit-content;
+  background: none;
+  border: none;
+}
+
+.NavForm
+{
+  height: 50%;
+  display: block;
+}
+.Project2
+{
+  position: relative;
+  top: 100px;
+}
+.Projects
+{
+
+  /*width: 30%;*/
+  height: 800px;
+  background-image: url("Logo/favicon.ico");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  border: none;
+}
+.ProjectTemp
+{
+  height: 800px;
+  background-image: url("Logo/favicon.ico");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  border: none;
+  filter: brightness(50%);
+
+}
+
+/*  Home Opening with my name + vfx start */
+.Title
+{
+  position: relative;
+  top: 45px;
+}
+.RedHover
+{
+
+}
+.RescaleFormHome
+{
+  max-height: 800px;
+  height: 800px;
+
+}
+
+/* Home Title Header Resizing*/
+.HomeTitleSize
+{
+  height: 50px;
+}
+/* Home Titles declaring groups of Projects  */
+.TitleText1
+{
+  font-size: 30px;
+  font-family: "Abril Fatface", serif;
+  font-weight: 500;
+  display: block;
+  font-style: normal;
+  color: #ffffff;
+  background-color: #000000;
+  margin: 0px;
+}
+.TitleText2
+{
+  font-size: 30px;
+  font-family: "Abril Fatface", serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  background-color: #333333;
+  margin: 0px;
+}
+@media (max-width: 730px) and (min-width: 520px){
+
+  .AboutMeRight{position: relative; left:20%;}
+  .
+  .AboutMeUp{position: relative; top:20%;}
+}
+
+@media (max-height: 1362px) and (min-height: 100px){
+
+  .AboutMeDown {position: relative; top:150%;}
+  .AboutMeLeft {position: relative; right:20%;}
+}
+
+#AboutMeP
+{
+  position: relative; top: 350px;
+
+}
+#AboutP
+{
+  position: relative;top: 425px;
+  display: none;
+}
+#AboutHR
+{
+  position: relative;
+  top: 200px;
+  width: 50%;
+  left: 25%;
+
+}
+
+#AboutHR2
+{
+  position: relative;
+  top: 500px;
+  width: 50%;
+  left: 25%;
+}
+
+#AboutHS
+{
+  position: relative;
+}
+#AboutHB
+{
+  border: none;
+  background-color: unset;
+  color: white;
+  position: relative;
+  top: 425px;
+}
+#AboutMeFooter
+{
+  background-image: url("Logo/HomeScreenLogo.png");
+  -webkit-mask-image: url("Logo/HomeScreenLogo.png");
+  background-repeat: no-repeat;
+  width: 128px; height: 128px;
+}
+
+
+#AboutMeFooterForm
+{
+  display: inline;
+}
+
+#ExtraC
+{
+  border: none;
+  background: none;
+  color: #ffffff;
+}
+#ExtraSkills
+{
+  position: relative;
+  top: 700px;
+  align: center;
+}
+
+#HomeButton
+{
+  position: fixed;
+  top: 1%; left: 1%;
+  z-index: 5;
+  width: 128px; height: 128px;
+  background-size: cover;
+  background-image: url("Logo/HomeScreenLogo.png");
+  -webkit-mask-image: url("Logo/HomeScreenLogo.png");
+}
+
+#HomeVid
+{
+  width: 100%;height:85%;
+  object-fit: cover;
+}
+#LinkedIn
+{
+  background-image: url("Logo/LinkedIn.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 90px; height: 90px;
+  position: relative;
+  bottom: 15px;
+}
+#NavButton {
+  position: fixed;
+  top: 1%;
+  right: 1%;
+  width: 128px; height: 128px;
+  background-size: cover;
+  background-image: url("Logo/Nav.png");
+  -webkit-mask-image: url("Logo/Nav.png");
+  z-index: 5;
+}
+
+#ProjectMissile
+{
+  background-image: url("Projects/00 Missile/Cover.PNG");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 25%;
+}
+#ProjectSea
+{
+  background-image: url("Projects/01 Ocean/054.PNG");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 95%;
+
+}
+#ProjectSky
+{
+  background-image: url("Logo/Sky.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#ProjectList
+{
+  position: relative;
+  top: 100px;
+}
+#ProjectExplanation
+{
+  position: relative;
+  top: 200px;
+  display: inline;
+}
+

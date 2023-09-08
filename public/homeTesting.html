@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>BC_PO</title>
+
+
+  <link rel="stylesheet" href="css/css/bootstrap.min.css">
+  <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+
+
+
+<header>
+  <form action="/">
+    <button type="button" class="btn btn-toolbar"id="HomeButton">
+
+    </button>
+
+    <button type="button" class="btn btn-toolbar" id="NavButton">
+
+    </button>
+  </form >
+
+  <video id="HomeVid" src="MLP.mp4" autoplay="autoplay" muted playsinline style="pointer-events: none;" loop type="video/mp4"></video>
+</header>
+
+
+<form class="NavForm" action="/">
+  <button type="button" class="Navigation">
+    <p class="IncreaseFontS">
+      Home Page
+    </p>
+  </button>
+</form>
+<form class="NavForm" action="/AboutMe">
+  <button type="button" class="Navigation">
+    <p class="IncreaseFontS">
+      About Me
+    </p>
+  </button>
+</form>
+
+
+
+
+
+<h1 class="text-center Title">Ben Campbell - Games | Aspiring VFX artist</h1>
+<h2 class="text-center Title"> Craft & Creativity for Games</h2>
+
+
+
+<form action="/Projects/:id" id="ProjectList">
+
+
+  <div class="row g-0">
+    <section class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
+      <button type="submit" class="Projects container-fluid" id="ProjectSea">
+        <p class="ButtonText">OCEAN</p>
+      </button>
+    </section>
+
+    <section class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
+      <button type="submit" class="Projects container-fluid" id="ProjectSky">
+        <p class="ButtonText">SKY</p>
+      </button>
+    </section>
+    <section class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
+      <button type="submit" class="Projects container-fluid">
+        <p class="ButtonText">GLSL SHADER</p>
+      </button>
+    </section>
+  </div>
+  <div class="row g-0">
+    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
+      <button type="submit" class="Projects container-fluid">
+        <p class="ButtonText">PLACEHOLDER</p>
+      </button>
+    </div>
+    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
+      <button type="submit" class="Projects container-fluid">
+        <p class="ButtonText">PLACEHOLDER</p>
+      </button>
+    </div>
+    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
+      <button type="submit" class="Projects container-fluid" >
+        <p class="ButtonText">PLACEHOLDER</p>
+      </button>
+    </div>
+    <section class="bg-dark text-center">
+      <button
+        href="/ExtraContent" id="ExtraC">Extra Projects
+      </button>
+    </section>
+  </div>
+  <!--        <div class="row g-0">-->
+  <!--          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--            <button type="submit" class="Projects container-fluid">-->
+  <!--              <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--            </button>-->
+  <!--          </div>-->
+  <!--          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--            <button type="submit" class="Projects container-fluid">-->
+  <!--              <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--            </button>-->
+  <!--          </div>-->
+  <!--          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--            <button type="submit" class="Projects container-fluid" >-->
+  <!--              <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--            </button>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--        <div class="row g-0">-->
+  <!--      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--        <button type="submit" class="Projects container-fluid">-->
+  <!--          <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--        </button>-->
+  <!--      </div>-->
+  <!--      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--        <button type="submit" class="Projects container-fluid">-->
+  <!--          <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--        </button>-->
+  <!--      </div>-->
+  <!--      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--        <button type="submit" class="Projects container-fluid" >-->
+  <!--          <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--        </button>-->
+  <!--      </div>-->
+
+  <!--    </div>-->
+  <!--        <div class="row g-0">-->
+  <!--      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--        <button type="submit" class="Projects container-fluid">-->
+  <!--          <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--        </button>-->
+  <!--      </div>-->
+  <!--      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--        <button type="submit" class="Projects container-fluid">-->
+  <!--          <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--        </button>-->
+  <!--      </div>-->
+  <!--      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--        <button type="submit" class="Projects container-fluid" >-->
+  <!--          <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--        </button>-->
+  <!--      </div>-->
+
+  <!--    </div>-->
+  <!--        <div class="row g-0">-->
+  <!--      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--        <button type="submit" class="Projects container-fluid">-->
+  <!--          <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--        </button>-->
+  <!--      </div>-->
+  <!--      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--        <button type="submit" class="Projects container-fluid">-->
+  <!--          <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--        </button>-->
+  <!--      </div>-->
+  <!--      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 ">-->
+  <!--        <button type="submit" class="Projects container-fluid" >-->
+  <!--          <p class="ButtonText">PLACEHOLDER</p>-->
+  <!--        </button>-->
+  <!--      </div>-->
+  <!--      <section class="bg-dark text-center">-->
+  <!--        <button-->
+  <!--          href="/ExtraContent" id="ExtraC">Extra Content-->
+  <!--        </button>-->
+  <!--      </section>-->
+  <!--    </div>-->
+
+</form>
+<br><br><br><br><br><br><br>
+
+
+
+<footer id="Footer" class="container-fluid text-center bg-dark ">
+  <h1 class="text-center"> Contacts Here:</h1>
+
+  <a type="submit" href="https://www.linkedin.com/in/ben-campbell-b43481200/" id="LinkedIn" ></a>
+
+
+</footer>
+<script src="jquery.js"></script>
+<script src="Scripts.js"></script>
+
+
+
+</body>
+</html>
