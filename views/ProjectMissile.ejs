@@ -1,0 +1,255 @@
+<%- include("./Partials/Header.ejs")%>
+
+
+<%- include("./Partials/Navigation.ejs") %>
+
+
+<div id="" class="row DownABit">
+    <p class ="text-center ExplanationText" >
+        A short summary of what I did was use textures either already in my possession or that comes by default from unreal engine to create a fireball that changes from passive to actively attacking "enemies".
+    </p>
+
+    <p class ="text-center ExplanationText" >
+        I used Uv Distortion and other techniques to create my own materials/effects with the assets I had and used particle color/dynamic parameters to make sure that the parameters were changeable over time through the unreal Niagara System.
+    </p>
+
+    <p class ="text-center ExplanationText" >
+        I explored the use of Particle Death to create different "Modes" of particles.
+    </p>
+
+    <p class ="text-center ExplanationText" >
+        I also made use of Flipbooks to create textures that change over time to fake the use of Changing Moving fireballs.
+    </p>
+
+    <p class ="text-center ExplanationText" >
+        Overall I think I could have used Lut's/gradient textures to colour the textures or attempted to create my own techniques but am still happy I learned or thought about particle death in what felt like a new way.
+    </p>
+</div>
+
+
+<div id="" class="row DownRABit ImgScaleMax2">
+    <video  src="/Projects/00 Missile/VidLong.mp4" controls type="video/mp4"></video>
+</div>
+
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        The important things to take note off in this VFX, is that the fireball changes from a passive state to homing in on the "enemy" (Cube for reference).
+    </p>
+    <p class="text-center ExplanationText">
+        Other things to note that I added are that the fireball decreases in size and gets brighter, to give a more compressed feeling when the fireball picks up in speed.
+    </p>
+    <p class="text-center ExplanationText">
+        I also added smoke which changes colour from orange to white to give the feeling of heat cooling as time goes on, although in the video it may not be clear as the angle was not perfect.
+    </p>
+    <p class="text-center ExplanationText">
+        I later show the shader complexity + quads, Which I made in a way that although not cheap, also gave the best visual experience, and there was plenty more room for optimisation than I explored.
+    <p class="text-center ExplanationText">
+        if I was to make this for a game I would decrease the amount of unnecessary Instructions/Textures to make the materials more optimised and cheap.
+    </p>
+    <p class="text-center ExplanationText">
+        the majority of the problems regarding material complexity etc. from what I see come from the SmokeTrail particle interestingly enough, If I had to guess why,
+    </p>
+    <p class="text-center ExplanationText">
+        I would assume it is because it has 64 Flip book images, and it switches between them randomly when the particles spawn.
+    </p>
+
+</div>
+
+<div class="row DownABit">
+    <p class="text-center ExplanationText">
+        Although these links are also referenced throughout this page, I thought to highlight them here In case they were not noticed (I only learned from the Missile Homing video):
+    </p>
+    <a class="text-center ExplanationText" href="https://www.youtube.com/watch?v=h2KqkygqPNU">Missile Homing on target</a>
+    <a class="text-center ExplanationText" href="https://www.youtube.com/watch?v=IHAEL6g7ZnI&pp=ygUWMyBjb3JlIGVsZW1lbnRzIG9mIHZmeA%3D%3D">3 core elements of VFX</a>
+    <a class="text-center ExplanationText" href="https://www.youtube.com/watch?v=lW_JwzxCn7c">Dark Souls 3</a>
+
+</div>
+
+
+
+
+<p class ="text-center DownABit ProjectExEnd">
+    Below is the Detailed list of what I did and how I did it:
+</p>
+
+
+
+
+
+<div id="" class="row DownRABit ImgScaleMax">
+<img
+        src="../public/Logo/Transparent.png"
+        data-src="/Projects/00 Missile/001.PNG"
+        loading="lazy"
+        class="ImgScale lazyload "
+        id="MissileExplanation1"
+        alt="Image for Explanation of Base,DeathSpawn,SmokeTrail and FireTrail Emitter's">
+
+<label class="ImageLabel text-center" for="MissileExplanation1 ">Explanation of Base,DeathSpawn,SmokeTrail and FireTrail Emitter's</label>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png"
+         data-src="/Projects/00 Missile/002.PNG" loading="lazy" class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ImgScale lazyload" id="MissileExplanation2"  alt="Image for Explanation of Antic, DeathSpawnExplos and FireTrail Emitter's">
+    <label class="ImageLabel text-center" for="MissileExplanation2">Explanation of Antic, DeathSpawnExplos and FireTrail Emitter's</label>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png"
+         data-src="/Projects/00 Missile/003.PNG" loading="lazy" class="ImgScale lazyload" id="MissileExplanation3" alt="Image for Explanation of FreePart, DeathSpawnSmoke and FireTrailGrav Emitter's" >
+    <label class="ImageLabel text-center" for="MissileExplanation3">Explanation of FreePart, DeathSpawnSmoke and FireTrailGrav Emitter's</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        The Base emitter is a fireball flipbook that launches at an enemy.
+
+    </p>
+    <p class="text-center ExplanationText">
+        The DeathSpawn emitter is an explosion flipbook that occurs when the Base emitter collides with the enemy.
+
+    </p>
+    <p class="text-center ExplanationText">
+        The DeathSpawnExplos emitter spawns multiple emissive particles downward when the Base Fireball hits the enemy.
+    </p>
+
+    <p class="text-center ExplanationText">
+        The SmokeTrail is a smoke emitter that gets spawned from the Base fireball to give the feeling of
+        the base fireball giving smoke that's being affected by wind.
+    </p>
+    <p class="text-center ExplanationText">
+        The Antic (anticipation) emitter emits small emissive balls to a point, this is so that there is an origin point for the fireballs and also meets anticipation from the
+        <a href="https://www.youtube.com/watch?v=IHAEL6g7ZnI&pp=ygUWMyBjb3JlIGVsZW1lbnRzIG9mIHZmeA%3D%3D">3 core elements of VFX</a>.
+    </p>
+    <p class="text-center ExplanationText">
+        The FireTrail emitter spawns fire from the Base Fireball emitter to give the feeling of the fireball leaving behind flame sparks/energy.
+    </p>
+    <p class="text-center ExplanationText">
+        The DeathSpawnSmoke spawns smoke at the location the Base fireball hits, where I used a curve to switch between orange, and then it changes over time
+        to a smoky colour to make the smoke
+    </p>
+    <p class="text-center ExplanationText">
+        merge better with the Fireball Explosion/Fireball rather than have the fire instantly change into a gray smoky
+        colour.
+    </p>
+    <p class="text-center ExplanationText">
+         The FireTrailGrav spawns emissive particles from the Base Fireball and this goes backwards to the left and right to give more life and movement to the fireball as it moves.
+    </p>
+    <p class="text-center ExplanationText ProjectExEnd">
+        The FreePart emitter is the interesting emitter of the VFX that I thought of.
+    </p>
+
+    <p class="text-center ExplanationText">
+        The reason I wanted to create this VFX to begin with was because I wanted to not only learn how fireballs could
+        home in on enemies/players etc. Which I learnt <a href="https://www.youtube.com/watch?v=h2KqkygqPNU">Here</a> but also how they switch from being passive to aggressive.</p>
+    <p class="text-center ExplanationText">
+        I wanted to create an VFX like the balls from <a href="https://www.youtube.com/watch?v=lW_JwzxCn7c">Dark Souls 3</a>
+        and wasn't 100% sure on how to create a fireball that switches between floating and launching at the player,
+    </p>
+    <p class="text-center ExplanationText">
+        The method was simple. I used a death event to spawn the Base Fireball.
+    </p>
+
+
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+<img src="../public/Logo/Transparent.png"
+     data-src="/Projects/00 Missile/FireTrail.PNG" loading="lazy" class="ImgScale lazyload" id="FireTrailMat" alt="FireTrail Material Image" >
+    <label class="ImageLabel2 text-center" for="FireTrailMat">FireTrail Material </label>
+</div>
+
+<div id="" class="row DownABit">
+
+    <p class="text-center ExplanationText">
+        Essentially, in the top left I have a panning noise texture that is added to the UV Texture Co-ords of a dust
+        clouds texture, </p>
+    <p class="text-center ExplanationText">
+        this creates UV distortion's for the dust 4x4 texture that was reused
+        throughout this texture which was then used to subtract from the texture below it.
+    </p>
+    <p class="text-center ExplanationText">
+        At the bottom left I have masked what I want the UV distortion to affect with the same dust cloud texture I have
+        been using, </p>
+    <p class="text-center ExplanationText">
+        I then multiply the Base sound (bottom left) by the subtraction amount (top
+        left) and multiply that by a dynamic parameter, so it is changeable from within Niagara,
+    </p>
+    <p class="text-center ExplanationText">
+        Which allows for me to control the strength of the Fire Trail with a curve, if I wanted to.
+    </p>
+    <p class="text-center ExplanationText">
+        I then clamp it between 0 and 1 and multiply the alpha and base colour of the final result by the particle colour, so it is editable in Niagara.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2" style="right: 0%">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/00 Missile/Antic, DeathspawnExplos,FireTrailGrav,FreePart.PNG" loading="lazy" class="ImgScale lazyload" id="FreePartMat" alt="Antic,
+    DeathspawnExplos,FireTrailGrav and FreePart Material Image" >
+    <label class="ImageLabel2 text-center" for="FreePartMat">Antic,
+        DeathspawnExplos,FireTrailGrav and FreePart Material</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        The material above is the material for the Antic, DeathspawnExplos, FireTrailGrav and FreePart particles, it's
+        essentially an emissive sphere that gets controlled from niagara via the particle colour node.</p>
+    <p class="text-center ExplanationText">
+        I believe this by default comes with unreal, but I added an extra multiply, so I could change it with a material instance and the scalar parameter.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/00 Missile/DeathSpawnSmoke, SmokeTrail.PNG" loading="lazy" class="ImgScale lazyload" id="SmokeMat" alt="DeathSpawnSmoke and SmokeTrail Material Image" >
+    <label class="ImageLabel2 text-center" for="SmokeMat">DeathSpawnSmoke and SmokeTrail Material</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I believe the material above is also a default unreal material, and is the material for the DeathSpawnSmoke and SmokeTrail particles, it uses the default unreal smoke texture flipbooks
+    </p>
+    <p class="text-center ExplanationText">
+        and I added onto it depth fade to add a bit more control of the opacity as well as using the Particle Color, so I could change it in Niagara.
+    </p>
+</div>
+
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/00 Missile/Deathspawn.PNG" loading="lazy" class="ImgScale lazyload" id="DeathSpawnMat" alt="DeathSpawn Material Image" >
+    <label class="ImageLabel2 text-center" for="SmokeMat">DeathSpawn Material</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I believe the material above was created by default by unreal engine and is the material for the DeathSpawn particle, it is just a flipbook, with extra controls I added.
+    </p>
+    <p class="text-center ExplanationText">
+        where I decided to add extra control through the colours of the flip book by multiplying the RGB channels separately
+        and gave the option to control whether to use its default colour or make your own colour/vector 3 (RGB) through the static switch parameter.
+    </p>
+    <p class="text-center ExplanationText">
+        This is then controlled by the particle colour node and with a bit of depth fade to make the edges a bit smoother.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/00 Missile/BaseFireball.PNG" loading="lazy" class="ImgScale lazyload" id="BaseFireballMat" alt="Base Fireball Material Image" >
+    <label class="ImageLabel2 text-center" for="BaseFireballMat">Base Fireball Material</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        The material above is the material for the Base Fireball particle,
+
+    </p>
+    <p class="text-center ExplanationText">
+        it is just another flip book where I decided to also control the colours of the flip book by multiplying the RGB channels separately and gave the option to control whether to use its default colour or make your own colour through the Static Switch Parameter.
+
+    </p>
+    <p class="text-center ExplanationText">
+        The difference between this and the previous material is that I also added a Dynamic Parameter called strength which I control via a curve in Niagara to control the strength of the fireball, so it gets stronger over time.
+    </p>
+</div>
+
+<%- include("./Partials/Footer.ejs") %>

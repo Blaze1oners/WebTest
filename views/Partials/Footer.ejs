@@ -1,0 +1,46 @@
+   <footer class="container-fluid Footer text-center AboutMeDown">
+       <h1 class="text-center"> Contacts Here:</h1>
+
+       <h3>Email:</h3><p><a href="https://mail.google.com/mail/u/0/?fs=1&to=bencampbell0702@gmail.com&su=SUBJECT&body=BODY&tf=cm">bencampbell0702@gmail.com</a></p>
+       <a type="submit" href="https://www.linkedin.com/in/ben-campbell-b43481200/" id="LinkedIn" ></a>
+
+       <form id="AboutMeFooterForm" method="get" action="/AboutMe">
+           <button id="AboutMeFooter" class="RedHover">
+           </button>
+       </form>
+
+   </footer>
+
+
+
+
+
+
+
+<script src="jquery.js"></script>
+<script src="/Scripts.js"></script>
+
+<!--   lazyload below-->
+<script src="./public/js/lazysizes-gh-pages/lazysizes.min.js"></script>
+
+<script>
+    if ("loading" in HTMLImageElement.prototype) {
+        var images = document.querySelectorAll('img[loading="lazy"]');
+        var sources = document.querySelectorAll("source[data-srcset]");
+        sources.forEach(function (source) {
+            source.srcset = source.dataset.srcset;
+        });
+        images.forEach(function (img) {
+            img.src = img.dataset.src;
+        });
+    } else {
+        var script = document.createElement("script");
+        script.src = "/link/to/lazyload.js";
+        document.body.appendChild(script);
+    }
+</script>
+
+
+
+</body>
+</html>

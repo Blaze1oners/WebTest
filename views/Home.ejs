@@ -1,0 +1,244 @@
+<%- include("./Partials/Header.ejs")%>
+
+
+<%- include("./Partials/Navigation.ejs") %>
+
+</script>
+
+<video id="HomeVid" src="/Projects/CoverVid.mp4" autoplay="autoplay" muted playsinline style="pointer-events: none;" loop type="video/mp4"></video>
+
+
+
+
+
+
+<h1 class="text-center Title">Ben Campbell - Games | Aspiring VFX artist</h1>
+<h2 class="text-center Title"> Visual FX for Games</h2>
+
+
+<!--  Techniques to use - using multiple images of the same thing (like the cloud) to make a new image (cloud)
+
+dont forget lut gradient
+photoshop making copy of image, and masking the middle of offset instead of using clone stamp
+potentially add to ocean/other projects in separate pages for different things about them like gernster for ocean etc.
+
+Potentially add tags of different software used to the projects,
+potentially through a project home page after project is chosen and more info is there
+also Potentially group different software into what software is primarily used in home page
+this can be done through the use of setting div backgrounds and having to the sides different text what kind of section it is
+Another thing that can be done in the future is categorise different project sections into different sections for better navigation and categorisation.
+Jave script focus is not working for changing color of RedHover items
+-->
+
+
+
+
+
+<!--Projects-->
+<div class="Home_Section">
+    <!--Project  Header-->
+    <div class="row g-0 Project2">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" >
+            <p class="TitleText1 text-center HomeTitleSize">
+                PROJECTS
+            </p>
+        </div>
+    </div>
+
+    <!--PS/SD Header2-->
+    <div class="row g-0 Project2">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" >
+            <p class="TitleText2 text-center HomeTitleSize">
+                Photoshop/Substance Designer
+            </p>
+        </div>
+    </div>
+
+    <!--PS/SD Projects-->
+    <div class="row g-0 Project2">
+
+
+        <!--Lightning-->
+        <form action="/Projects/Lightning" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+            <button type="submit" class="Projects container-fluid">
+            </button>
+            <p class="ButtonText"><a href="../Projects/Lightning">LIGHTNING</a></p>
+        </form>
+        <!--    Tornado-->
+        <form action="/Projects/Tornado" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+            <button type="submit" class="Projects container-fluid">
+            </button>
+            <p class="ButtonText"><a href="../Projects/Tornado">TORNADO</a></p>
+        </form>
+
+    </div>
+
+    <!--Maya Header2-->
+    <div class="row g-0 Project2">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" >
+            <p class="TitleText2 text-center HomeTitleSize">
+                Maya
+            </p>
+        </div>
+    </div>
+
+    <!--Maya Projects-->
+    <div class="row g-0 Project2">
+
+
+        <form action="/Projects/Template" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+            <button type="submit" class="Projects container-fluid">
+            </button>
+
+            <p class="ButtonText"><a href="../Projects/Template">RBD CHARACTER DASH</a></p><!--            I believe this can be achieved by hiding player, unhiding rbd pieces, rbd pieces come together, then unhide and hide reverse player and rbd pieces-->
+        </form>
+        <!--    Blood River-->
+        <form action="/Projects/BloodRiver" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+            <button type="submit" class="Projects container-fluid">
+            </button>
+            <p class="ButtonText"><a href="../Projects/BloodRiver">BLOOD RIVER</a></p>
+        </form>
+        <!--    River-->
+        <form action="/Projects/River" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+
+            <button type="submit" class="Projects container-fluid">
+
+            </button>
+            <p class="ButtonText"><a href="../Projects/River">RIVER</a></p>
+        </form>
+    </div>
+    <!--Houdini Header 2-->
+    <div class="row g-0 Project2">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" >
+            <p class="TitleText2 text-center HomeTitleSize">
+                Houdini
+            </p>
+        </div>
+    </div>
+
+    <!--Houdini Projects-->
+    <div class="row g-0 Project2">
+        <!--    Chain Lightning-->
+        <form action="/Projects/ChainLightning" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+
+            <button type="submit" class="Projects container-fluid">
+
+            </button>
+            <p class="ButtonText"><a href="../Projects/ChainLightning">CHAIN LIGHTNING</a></p>
+        </form>
+        <!--    Heal-->
+        <form action="/Projects/Heal" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+
+            <button type="submit" class="Projects container-fluid">
+
+            </button>
+            <p class="ButtonText"><a href="../Projects/Heal">HEAL</a></p>
+        </form>
+        <!--    Shadow Teleportation-->
+        <form action="/Projects/Shadow" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+            <button type="submit" class="Projects container-fluid">
+            </button>
+
+            <p class="ButtonText"><a href="../Projects/Shadow">SHADOW TELEPORTATION</a></p>
+        </form>
+    </div>
+
+    <!--Projects End-->
+    <div class="row g-0 Project2">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" >
+            <a href="../ExtraProject" class="text-center TitleText1 ">Extra Projects</a>
+        </div>
+    </div>
+</div>
+
+<!--Experimentation-->
+<div class="Home_Section">
+    <!--Experimentation  Header-->
+    <div class="row g-0 Project2">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" >
+            <p class="TitleText1 text-center HomeTitleSize">
+                EXPERIMENTATION
+            </p>
+        </div>
+    </div>
+
+    <!--Unreal Header2-->
+    <div class="row g-0 Project2">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" >
+            <p class="TitleText2 text-center HomeTitleSize">
+                Unreal
+            </p>
+        </div>
+    </div>
+
+
+    <!--Unreal Projects-->
+    <div class="row g-0 Project2">
+        <!--    MindBending-->
+        <form action="/Projects/Template" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+            <button type="submit" class="Projects container-fluid">
+            </button>
+
+            <p class="ButtonText"><a href="../Projects/Template">MIND BENDING</a></p><!--         this means stuff like walls rotating etc, Change from Fish Eyes in front of a PC in game to inside of the pc, pc distortion and pc scanlines-->
+        </form>
+
+        <!--    Sky-->
+        <form action="/Projects/Sky" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome"><!--        Sky Sphere/Cylinder, Clouds, Lightning Clouds, Rain, Time of Day-->
+
+            <button type="submit" class="Projects container-fluid" id="ProjectSky">
+
+            </button>
+            <p class="ButtonText"><a href="../Projects/Sky">SKY</a></p>
+        </form>
+        <!--    Missile -->
+        <form action="/Projects/Missile" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+            <button type="submit" class="Projects container-fluid" id="ProjectMissile">
+            </button>
+            <p class="ButtonText"><a href="../Projects/Missile">MISSILE</a></p>
+        </form>
+    </div>
+
+    <!--PS/SD Header2-->
+    <div class="row g-0 Project2">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" >
+            <p class="TitleText2 text-center HomeTitleSize">
+                Photoshop/Substance Designer
+            </p>
+        </div>
+    </div>
+
+    <!--PS/SD Projects-->
+    <div class="row g-0 Project2">
+
+
+        <!--Lightning-->
+        <form action="/Projects/Lightning" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+            <button type="submit" class="Projects container-fluid">
+            </button>
+            <p class="ButtonText"><a href="../Projects/Lightning">LIGHTNING</a></p>
+        </form>
+        <!--    Ocean-->
+        <form action="/Projects/Ocean" class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 RescaleFormHome">
+            <button type="submit" class="Projects container-fluid" id="ProjectSea">
+            </button>
+            <p class="ButtonText"><a href="../Projects/Ocean">OCEAN</a></p>
+        </form>  <!--   GERNSTER + FOAM/ potentially caustics "https://www.youtube.com/watch?v=UWGwq-_w08c&pp=ygUUZ2VybnN0ZXIgZm9hbSB1bnJlYWw%3D" for reference INTENDED FOR FUTURE potentially use scene depth or another method to change colour of below surface colours,
+           if making waterfall, potentially mix mesh with particles falling to break the flat feeling-->
+
+    </div>
+
+
+
+    <!--Experimentation End-->
+    <div class="row g-0 Project2">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" >
+            <a href="../ExtraExperiment" class="text-center TitleText1 ">Extra Experiments</a>
+        </div>
+    </div>
+
+
+
+</div>
+
+<%- include("./Partials/Footer.ejs") %>
+

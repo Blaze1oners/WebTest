@@ -1,0 +1,992 @@
+<%- include("./Partials/Header.ejs")%>
+
+
+<%- include("./Partials/Navigation.ejs") %>
+
+
+<!--add alt, add label starting from line 440, add explanation text-->
+
+
+
+<div id="" class="DownABit row">
+    <p class="text-center ExplanationText">
+        A short summary of what I did is - I created a normal texture from an image I found online, created fake
+        lighting with noise, the camera vector and maths. </p>
+    <p class="text-center ExplanationText">
+        I lowered the opacity when the camera position is below the mesh, used named reroutes to make sure my code was neat as organized as possible, I experimented with scene depth and used distance fields to create nice effects, both on transparent and masked materials.
+    </p>
+
+    <p class="text-center ExplanationText">
+        I also created my own unique version of checking where the camera was in relation to the mesh, created fake emissive
+        lighting with uv distorted swirly noise.</p>
+    <p class="text-center ExplanationText">
+        I used refraction to make the material look nicer, I did optimisation, mostly on the Noise textures which resulted in better emissive Lighting and the identification of the most problematic parts of the material.
+    </p>
+
+    <p class ="text-center ExplanationText">
+         This allowed for further optimisation to be taken if necessary. I however felt like for an ocean, as it was that it was not too expensive at a red material I also looked on houdini whether I could find a way to not only export
+    </p>
+
+    <p class="text-center ExplanationText">
+        A flip fluid sim as geometry and then bake a normal texture from it, which I believe could be possible based on the limited amount of time and research I did,
+    </p>
+    <p class="text-center ExplanationText">
+        I also thought of but decided against using a VAT texture and animated geometry and to create a material for that animated ocean.
+    </p>
+
+    <p class="text-center ExplanationText">
+        Overall although there are some areas I decided not to do based on the fact that there was already a lot of images explaining my methods and I didn't want it to be longer,
+    </p>
+
+    <p class="text-center ExplanationText">
+        I did in the end get a result I am happy with, It has a more stylistic look and so when I create a river in the future I will make it look more realistic to add more variation to the projects I want to work on.
+    </p>
+</div>
+
+
+<div id="" class="row DownRABit ImgScaleMax2">
+    <video  src="/Projects/01 Ocean/Ocean VidLong.mp4" controls type="video/mp4"></video>
+</div>
+
+<div class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here are some Links that I used when making this:
+    </p>
+    <a class="text-center ExplanationText" href="https://webrfree.com/wp-content/uploads/2018/12/Blue-sea-4K-texture-3840x2160-001243545.jpg">Ocean Image</a>
+    <a class="text-center ExplanationText" href="https://forums.unrealengine.com/t/material-changing-based-on-angle-of-view-from-camera/89334/3">Chosker's Getting Angle Shader Math origin</a>
+    <a class="text-center ExplanationText" href="https://forums.unrealengine.com/t/water-looks-weird/346621/4">(I am not sure if it helped) Raildex's Refraction Fix  </a>
+    <a class="text-center ExplanationText" href="https://www.youtube.com/watch?v=ABv7abxTMoM">Video On Scene Depth</a>
+</div>
+
+
+
+
+
+
+
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/000.PNG" loading="lazy" class="ImgScale lazyload" alt="Image for Finding a Water Texture Online" id="WaterTexture"
+         width="1" height="1">
+    <label for="WaterTexture" class="ImageLabel2 text-center">Finding a usable Online Water Texture to challenge myself, instead of using online/my own resources</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I started off finding an image online and trying to use that to generate a normal texture from it, there were some problems with it,
+    </p>
+    <p class="text-center ExplanationText">
+        it wasn't a power of two image by default, It had some lighting already on it, so it wasn't a brilliant image to use from the start.
+    </p>
+
+
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/001.PNG" loading="lazy" class="ImgScale lazyload" alt="Image for Cropping Water Texture" id="CropWaterTexture">
+    <label for="CropWaterTexture" class="ImageLabel2 text-center"> Cropping the Image Down to 2048x2048 so its power of two</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I started off by cropping it down to a power of two 2048x2048 texture, so it was at least a usable texture.
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/002.PNG" loading="lazy" class="ImgScale lazyload" alt="Image for duplicating, moving and flipping the bottom half to upside down to the top " id="TransformWaterTexture">
+    <label for="TransformWaterTexture" class="ImageLabel2 text-center">Duplicating, moving and flipping the bottom half to the top</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I then decided to copy and paste the bottom half, using the ruler tool, so it was perfectly in the center.
+
+    </p>
+    <p class="text-center ExplanationText">
+        I then flipped the image by changing H to -100% at the top of the screen, this is so that the texture could be seamless.
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/003.PNG" loading="lazy" class="ImgScale lazyload" alt="Offsetting The Image to Mask the Seams" id="OffsetSeam1">
+    <label for="OffsetSeam1" class="ImageLabel2 text-center">Offsetting The Image to Mask the Seams</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I also used the trustworthy offset tool, to offset the image by 1024x1024 so the center was on the outside of the image.
+    </p>
+    <p class="text-center ExplanationText">
+        I then used the Spot Healing Brush tool on the seams to try to hide the seams a bit more.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png"  data-src="/Projects/01 Ocean/004.PNG" loading="lazy" class="ImgScale lazyload" alt="Offsetting The Image to Mask the Seams pt2" id="OffsetSeam2">
+    <label for="OffsetSeam2" class="ImageLabel2 text-center">Offsetting The image Again</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I repeated the process.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/005.PNG" loading="lazy" class="ImgScale lazyload" alt="Offsetting The Image to Mask the Seams pt3 " id="OffsetSeam3">
+    <label for="OffsetSeam3" class="ImageLabel2 text-center">And again</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        And again.
+    </p>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/006.PNG" loading="lazy" class="ImgScale lazyload" alt="Converting the Texture to Normals Using xNormal" id="OceanxNormalConversion">
+    <label for="OceanxNormalConversion" class="ImageLabel text-center"> Converting Height details to Normal Texture using xNormal</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here I used the xNormal plugin for photoshop to convert the height details to normal details function.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/007.PNG" loading="lazy" class="ImgScale lazyload" alt="Duplicating Normal Texture to add Sharpness/Strength" id="OceanNormalSharpness">
+    <label for="OceanNormalSharpness" class="ImageLabel2 text-center">Duplicating Normal Texture to add Sharpness/Strength</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I felt the image by default didn't have enough strength, so I duplicated it, changed it to linear light, and duplicated it until I was satisfied.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/007.5.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of how I blurred the bottom left of the image causing slight problems" id="OceanProblem">
+    <label for="OceanProblem" class="ImageLabel2 text-center">I blurred the bottom left of the image causing slight problems</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I felt the bottom left of the normal texture was too strong, so I copied the end result of the normal texture using
+    </p>
+    <p class="text-center ExplanationText">
+        CTRL+A, CTRL+SHIFT+C, then using CTRL+SHIFT+V I pasted the end result, then I turned that into a smart object, applied a gaussian blur to the image,
+
+    </p>
+    <p class="text-center ExplanationText">
+        Because it was a smart object it allowed for me to mask the image, where I made my only real mistake in making my shader/Ocean material. The difference between the blurred image and the non-blurred part of the image was too obvious.
+
+    </p>
+    <p class="text-center ExplanationText">
+        This fortunately did not cause too many problems because I used unreal to mask these problems and make them less
+        problematic, but it essentially caused lines in my material to show up, and it wasn't as seamless as I would have
+        wanted.</p>
+    <p class="text-center ExplanationText">
+        If I was to go back and do it again I would use a non-hard brush and smooth out the edges of the mask.
+    </p>
+
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/008.PNG" loading="lazy" class="ImgScale lazyload" alt="Importing Normal texture and creating a Basic colour Image" id="OceanFirstUnrealImage">
+    <label for="OceanFirstUnrealImage" class="ImageLabel text-center">Importing Normal texture and creating a Basic colour Image</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here I just imported the normal texture and used a blue colour for the base colour.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/009.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Using Four Way Motion Chaos to add variety to Normal Texture" id="OceanMotionChaos">
+    <label for="OceanMotionChaos" class="ImageLabel2 text-center">Using Four Way Motion Chaos to add variety to Normal Texture</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I used Unreal's Material Function, Motion 4WayChaos to make the Normal texture move in different directions.
+    </p>
+    <p class="text-center ExplanationText">
+        I did however delete one of the nodes adding a direction, so it is essentially 3WayChaos.
+    </p>
+    <p class="text-center ExplanationText">
+        This is likely to be the main contributor to masking my Normal texture Error. In fact, it ended up creating a nice "Wave".</p>
+    <p class="text-center ExplanationText">
+        I also used scalar parameters and grouped them to make sure it was editable and organised when I made a material instance.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/010.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of My current Progress making the Ocean" id="OceanCurrentProgress1">
+    <label for="OceanCurrentProgress1" class="ImageLabel2 text-center"> My current Progress making my Ocean Material</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        My current progress is Shown above.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/011.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of using the green channel of the texture to create a mask for the alpha" id="OceanAlpha1">
+    <label for="OceanAlpha1" class="ImageLabel2 text-center">Using the green channel to create a mask for the alpha</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+       I used the green channel of the texture to create a mask for the alpha, so that I could have tiny moving wave holes in the material, this created a nice effect.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/012.PNG" loading="lazy" class="ImgScale lazyload" alt="Example Image of how the alpha is working" id="OceanAlphaExample">
+    <label for="OceanAlphaExample" class="ImageLabel2 text-center">This is how the Alpha works</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above is how the alpha works currently. I added a plane below the ocean plane and made it black,
+    </p>
+    <p class="text-center ExplanationText">
+        if there was ground underneath it would look that colour, if there is nothing, it would look the same colour as the unreal background color.
+    </p>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/013.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of changing the material to translucent" id="OceanTranslucent1">
+    <label for="OceanTranslucent1" class="ImageLabel text-center">Changing the material to translucent</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        To experiment with the material and how it looks in different versions of the material, I made the material translucent.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/014.PNG" loading="lazy" class="ImgScale lazyload" alt="Extra Alpha Control Image" id="OceanAlphaControl">
+    <label for="OceanAlphaControl" class="ImageLabel2 text-center">Adding more control to the Alpha </label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I used the static switch parameter to add more control to alpha, this gave me control of whether to use the mask as alpha or to just lower the opacity directly.
+    </p>
+
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/015.PNG" loading="lazy" class="ImgScale lazyload" alt="Fake Lighting attempt 1 Explanation Image" id="OceanFakeLight1">
+    <label for="OceanFakeLight1" class="ImageLabel2 text-center">Fake Lighting attempt 1 </label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I first started my experimentation of getting on the fake lighting via "Camera Position Attempt", I mainly wanted a mask that allowed me to get something different each time the camera looked at it.
+    </p>
+    <p class="text-center ExplanationText">
+        I guess a more accurate explanation of this would be that I wanted the Fake lighting to be different based on where the camera looked at it from,
+    </p>
+    <p class="text-center ExplanationText">
+        This meant that I probably could have gotten a better result from the camera vector instead of the camera position I ended up using, by masking the RGB channels separately I could control how the mask interacted with the plane.
+    </p>
+    <p class="text-center ExplanationText">
+        I ended up using the "Reflection Vector Attempt method", although I really like the way this ended up looking, the main problem with it was the way it was very noticeable how it only appears from one side and always directly in the center of the plane.
+    </p>
+    <p class="text-center ExplanationText">
+        I also Multiplied the base colour by itself to get darker shades. Which I used if the values of the mask were different values.
+    </p>
+
+    <p class="text-center ExplanationText">
+        I think this got more noticeable as the camera got closer to where the lighting came from and eventually disappeared when the camera got further away.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/016.PNG" loading="lazy" class="ImgScale lazyload" alt="Ocean Fake Lighting Example Image" id="OceanFakeLight1I">
+    <label for="OceanFakeLight1I" class="ImageLabel2 text-center"> Image of how the fake lighting looked at this point</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above is how it ended up looking.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/017.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Lowering Opacity when Camera is below Surface" id="OceanCameraAlpha">
+    <label for="OceanCameraAlpha" class="ImageLabel2 text-center"> Lowering Opacity when Camera is below Surface</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I check where the camera is in relation to the ocean plane above and multiply the default opacity by a low number
+    </p>
+    <p class="text-center ExplanationText">
+        so the sky is more visible and the waves are not very opaque looking.
+    </p>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/018.PNG" loading="lazy" class="ImgScale lazyload"  alt="Ocean Named Reroutes Image" id="OceanNamedReroutes">
+    <label for="OceanNamedReroutes" class="ImageLabel text-center"> Using Named Reroutes</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        This Image simply shows that I used named reroutes for organisation purposes and making my shader as neat as possible.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/019.PNG" loading="lazy" class="ImgScale lazyload" alt="Changes to the Fake Lighting Image" id="OceanFakeLight2">
+    <label for="OceanFakeLight2" class="ImageLabel2 text-center">Changes to the Fake Lighting</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here I made some drastic changes, after not much experimentation, I felt more satisfied with the end result of the above image.
+    </p>
+    <p class="text-center ExplanationText">
+        The reason why it works is mostly because it gets the dot product of the Reflection vector and the camera position, the rest only smoothed/blurred/offsetted the image slightly.
+    </p>
+    <p class="text-center ExplanationText">
+        I hooked into the if node the dark colours/default colour to maintain the fake lighting look.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/020.PNG" loading="lazy" class="ImgScale lazyload" alt="Example Image of Changes to Fake Lighting" id="OceanFakeLight2I">
+    <label for="OceanFakeLight2I" class="ImageLabel text-center">Fake Lighting Progress</label>
+</div>
+
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here you can see that the Ocean was now split into different shades of blue depending on where the camera looked.
+    </p>
+    <p class="text-center ExplanationText">
+        The main problems I had with this was that the movement of the lighting would look jarring when the camera was moved around,
+    </p>
+    <p class="text-center ExplanationText">
+        There was also the fact that they were clearly in the form of bars, so it would not work for game engines in my opinion.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/021.PNG" loading="lazy" class="ImgScale lazyload" alt="Adding Noise to break up the lines of Fake lighting Image " id="OceanFakeLighting3">
+    <label for="OceanFakeLighting3" class="ImageLabel2 text-center">Adding Noise to break up the lines of Fake lighting</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here I added noise to the Fake Lighting and gave the option to smooth it. This provides a less noticeable and distracting Fake Lighting.
+    </p>
+    <p class="text-center ExplanationText">
+        Although this Fake lighting isn't even required I think it's a nice additional thing to add to the shader if possible.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/022.PNG" loading="lazy" class="ImgScale lazyload" alt="Example Image of adding noise to Fake Lighting" id="OceanFakeLighting3I">
+    <label for="OceanFakeLighting3I" class="ImageLabel2 text-center">Adding noise to Fake Lighting Progress</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        This broke up the problems with the Fake Lighting and helped integrate it subtly with the material.
+    </p>
+    <p class="text-center ExplanationText">
+        It is quite difficult to see, but it makes the right side brighter than the left in the image.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/023.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Starting to think about Camera Information for use in the shader" id="OceanCameraInfo1">
+    <label for="OceanCameraInfo1" class="ImageLabel2 text-center">Starting to get the Camera Information</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above and to the right I started to experiment with getting the camera Location/angle  for use in refraction/reflection, I wanted it to get more reflective as the camera looked at it from different perspectives,
+    </p>
+    <p class="text-center ExplanationText">
+        Which I used the Camera Vector and 0,0,1 for this resulted at least in the preview of the material area in a nice mask that got below the camera, this in an ideal world would have resulted in nice use for making close the camera more see through and far away a more reflective look.
+    </p>
+    <p class="text-center ExplanationText">
+        If I remember correctly, it works somewhat like that but if the camera got high up, the mask expands massively, which most likely would work for a game, but I was not perfectly satisfied with it.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/024.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Using the Camera Information for Refraction" id="OceanRefraction1">
+    <label for="OceanRefraction1" class="ImageLabel2 text-center">Using the Camera Information for Refraction</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here I started to test that mask with Refraction.
+    </p>
+    <p class="text-center ExplanationText">
+        Refraction has been one of the worst parts of this shader in the end, it wasn't fixed even till the end, causing weird artifacts even when the refraction mode was set to Pixel Normal Offset,
+    </p>
+    <p class="text-center ExplanationText">
+        Although this may be because I tried another method of fixing it first, this being through Temporal AA, which I will talk about later.
+    </p>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/025.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Refraction Artifacts and Testing with layer below" id="OceanRefraction1I">
+    <label for="OceanRefraction1I" class="ImageLabel text-center">Refraction Artifacts and Testing with layer below</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above you can see the weird artifacting that occurred when it came to the sides.
+    </p>
+    <p class="text-center ExplanationText">
+        There was also the fact that when the camera moved, There was weird artifact Lines where the Ocean looked completely different, and it was quite jarring and noticeable, Most definitely not fit for games.
+    </p>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/026.PNG" loading="lazy" class="ImgScale lazyload" alt="Image for adding controls to turn off Refraction" id="OceanRefraction2">
+    <label for="OceanRefraction2" class="ImageLabel text-center">Adding controls to turn off Refraction</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above you can see that I added controls to turn it off/what felt like it was turned off at the time.
+    </p>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/026.5.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of the Temporal AA fix" id="OceanTemporalAAFix">
+    <label for="OceanTemporalAAFix" class="ImageLabel text-center">Temporal AA fix</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        In one of the links at the top of the page there is a link that said this may help with the refraction errors, although I couldn't notice much change I thought to mention it as well as the fact that
+    </p>
+    <p class="text-center ExplanationText">
+        I also attempted changing the refraction mode to pixel normal offset which is meant to fit better for things like large bodies of water, yet it seems not to work perfectly in my current case.
+    </p>
+    <p class="text-center ExplanationText">
+        This also contributed to why I decided to stick to the more stylized approach in the end.
+    </p>
+
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/026.7.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of changing the angle of incidence + hooking that into a named reroute for reuse" id="OceanCameraInfo2">
+    <label for="OceanCameraInfo2" class="ImageLabel2 text-center">Changing the angle of incidence + hooking that into a named reroute for reuse</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above I simply added minor changes and made this function easily accessible to any part of the material without long and messy lines/reroutes.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/027.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Getting Image of the sky" id="OceanImageSky">
+    <label for="OceanImageSky" class="ImageLabel2 text-center">Getting Image of the sky </label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above I got an image of the sky for use for reflection.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/028.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Simplifying Refraction for better use in a Game situation" id="OceanRefractionSimple">
+    <label for="OceanRefractionSimple" class="ImageLabel2 text-center">Simplifying Refraction for better use in a Game situation</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here I simplified the Refraction functionality so that I could use it easier.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/029.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of the swirly noise for the Emissive Sun Lighting" id="OceanSunLight1">
+    <label for="OceanSunLight1" class="ImageLabel2 text-center">Emissive Sun Lighting Swirly noise</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here is the start of my creating a quite decent shader, in my opinion, I simply used Unreals Noise textures and UV Distortion to create swirling noise that moves over time.
+    </p>
+    <p class="text-center ExplanationText">
+        I then hook it up to a named reroute node for organisation purposes.
+    </p>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/030.PNG" loading="lazy" class="ImgScale lazyload" alt="Emissive Light Functionality Image" id="OceanSunLight2">
+    <label for="OceanSunLight2" class="ImageLabel text-center">Emissive Light Functionality</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here I just use the swirly noise and the camera function to make Emissive Light in areas where the camera isn't as well as only in the areas where the swirly noise was white.
+    </p>
+
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/031.PNG" loading="lazy" class="ImgScale lazyload" alt="Adjusting Camera Functionality according to testing Image" id="OceanCameraInfo3">
+    <label for="OceanCameraInfo3" class="ImageLabel2 text-center">Adjusting Camera Functionality according to testing</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        At this point I tested the Fake Lighting in the viewport of unreal and this vector resulted in better results according to what I wanted to go for.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/031.5.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of attempting to use single layer water material" id="OceanSingleLayerWater">
+    <label for="OceanSingleLayerWater" class="ImageLabel2 text-center">Attempting to use single layer water material</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here I started to experiment with how the single layer water material interacted with my current material, and decided, although it looked nice it kind of messed with my current progress.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/032.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Current Progress with SingleLayerWater Not Activated" id="OceanCurrentProgress2">
+    <label for="OceanCurrentProgress2" class="ImageLabel2 text-center">Current Progress with SingleLayerWater Not Activated</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above should be my current progress without the SingleLayer Water. I remember that the Refraction was working to a better extent at this point, although it was still feeling rather buggy.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/033.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Choskers Version of Using Camera to get Information" id="OceanCameraInfo4">
+    <label for="OceanCameraInfo4" class="ImageLabel2 text-center">Choskers Version of Using Camera to get Information</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I added this version of the camera location functionality, In the image I replace the previous one, but I actually end up separating them and using them for separate purposes.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/034.PNG" loading="lazy" class="ImgScale lazyload" alt="Adding to the existing Fake Lighting Image" id="OceanFakeLighting4">
+    <label for="OceanFakeLighting4" class="ImageLabel2 text-center">Adding to the existing Fake Lighting</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        The important thing to mention here is that I added to the already existing Fake Lighting based on the "New" camera function.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/035.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of separating the different Camera Functions" id="OceanCameraInfo3I">
+    <label for="OceanCameraInfo3I" class="ImageLabel2 text-center">Separating the different Camera Functions</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here is how separating the camera functions that I talked about before looks.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/036.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Creating Named Reroute of the Fake Lighting" id="OceanFakeLighting5">
+    <label for="OceanFakeLighting5" class="ImageLabel2 text-center">Creating Named Reroute of the Fake Lighting</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here I got the Fake Lighting as a named reroute, so I could use it as a mask for the Emissive Lighting.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/037.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Using that mask as for the Emissive Lighting" id="OceanSunLight3">
+    <label for="OceanSunLight3" class="ImageLabel2 text-center">Using that mask as for the Emissive Lighting</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here I used multiplication to mask the emissive sun lighting to the fake Lighting as it does not make sense for it to appear where lighting does not.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/039.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Returning to a Masked Image" id="OceanMaskedImage">
+    <label for="OceanMaskedImage" class="ImageLabel2 text-center">Returning to a Masked Image</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        This is where I returned to a Masked Image and quite quickly preferred this result.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/040.PNG" loading="lazy" class="ImgScale lazyload" alt="Image for DistanceFieldMask Generation" id="OceanDistanceFieldMask">
+    <label for="OceanDistanceFieldMask" class="ImageLabel2 text-center">Distance Field Mask Generation</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        At this point I started using DistanceToNearestSurface to get a mask of where other meshes are in relation to the ocean, this meant I had to change whether these meshes generated distance fields.
+    </p>
+
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/041.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of DistanceFieldMask In operation" id="OceanDistanceFieldMaskI">
+    <label for="OceanDistanceFieldMaskI" class="ImageLabel2 text-center">DistanceFieldMask In Operation</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here is the result of using the Distance Field to mask out what is near the objects that are is within the ocean plane.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/042.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of A perspective from another lighting" id="OceanLightingView">
+    <label for="OceanLightingView" class="ImageLabel2 text-center">A perspective from another lighting</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        This is the result after the lighting was changed.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/043.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Experimenting with SceneDepth" id="OceanSceneDepth">
+    <label for="OceanSceneDepth" class="ImageLabel2 text-center">Experimenting with SceneDepth</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I started experimenting with Scene Depth, to give the feeling of seeing through the water with the translucent material.
+    </p>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/044.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Plugging in the SceneDepth to Opacity" id="OceanSceneDepth">
+    <label for="OceanSceneDepth" class="ImageLabel text-center">Plugging in the SceneDepth to Opacity</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I plugged the Scene Depth into opacity, although it isn't in effect until the material is translucent, It allows for further control on how the final shader will look.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/045.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Masked Ocean progress" id="OceanMasked">
+    <label for="OceanMasked" class="ImageLabel2 text-center">Masked Ocean progress</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        My current Masked Progress is above.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/046.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Translucent Ocean progress" id="OceanTranslucent">
+    <label for="OceanTranslucent" class="ImageLabel2 text-center">Translucent Ocean progress</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        My current Translucent Progress is above.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/047.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of splitting the Scene Depth into two Named Reroutes" id="OceanSplittingNamed">
+    <label for="OceanSplittingNamed" class="ImageLabel2 text-center">Splitting the Scene Depth into two Named Reroutes</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I split the named reroutes into two, so I could control how far down the SceneDepth captured as well as the scene depth in total.
+    </p>
+    <p class="text-center ExplanationText">
+        I used Scene Depth in the end for Changing the colour of objects under the Ocean and to lower the opacity.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/048.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of SceneDepth for colour" id="OceanSceneDepthCol">
+    <label for="OceanSceneDepthCol" class="ImageLabel2 text-center">SceneDepth for Colour</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here is how I ended up using it for colour. Essentially it means where there is an object under the ocean it will be a lighter blue colour.
+    </p>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/049.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of The problem with the SceneDepth" id="OceanSceneDepthProb">
+    <label for="OceanSceneDepthProb" class="ImageLabel text-center">The problem with the SceneDepth</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        The Problem with the Scene Depth as it was, was that it changed the color too far down, so I fixed this by splitting the named reroutes apart and making sure they were different enough,
+    </p>
+    <p class="text-center ExplanationText">
+        The scene depth normal for lowering opacity and SceneDepth close for changing the color and the opacity.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/050.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Separating the values of SceneDepth" id="OceanSceneDepthSeparate">
+    <label for="OceanSceneDepthSeparate" class="ImageLabel2 text-center">Separating the values of SceneDepth</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        In the Image above I separate the values of scene depth by using  another scalar parameter for the control I need.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/051.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of how the the fixed version looks" id="OceanSceneDepthFixed">
+    <label for="OceanSceneDepthFixed" class="ImageLabel2 text-center">How the fixed version looks</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        This is how it looks now that I have control over the depth in multiple case scenario's.
+    </p>
+    <p class="text-center ExplanationText">
+        I got rid of the meshes too far down, so only those nearer to the surface are more visible.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/052.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of making the SceneDepth only apply to translucent material through Static Switch Params" id="OceanSceneDepthType">
+    <label for="OceanSceneDepthType" class="ImageLabel2 text-center">Making the SceneDepth only apply to translucent material through Static Switch Params</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        To make sure it is only applied when masked materials are not active I added a static switch parameter was added, although not a perfect solution, It works.
+    </p>
+
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/053.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Choosing not to Tessellate/use Gernster Waves" id="OceanNoGernster">
+    <label for="OceanNoGernster" class="ImageLabel text-center">Choosing not to Tessellate/use Gernster Waves</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I chose not to use Gernster Waves, at least not yet.
+    </p>
+    <p class="text-center ExplanationText">
+        Mostly because it wasn't what I was experimenting with as well as the fact that the mesh didn't have enough polygons to work with.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/053.5.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of adding Reflective Image to see how reflections work with material" id="OceanReflectiveTexture1">
+    <label for="OceanReflectiveTexture1" class="ImageLabel2 text-center">Adding Reflective Image</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Although it was a while ago that I took a screenshot of the sky, I used that as a reflective image, for speed purposes, but normally you should take a cube texture instead. I ended up with some nice results however.
+    </p>
+    <p class="text-center ExplanationText">
+        By hooking that texture into a lerp between the normal Base colour and the reflective texture (through the use of the reflection vector).
+    </p>
+    <p class="text-center ExplanationText">
+        I also made the alpha the camera function, so it made it so only far away parts of the water was reflective. I read in a book that the ocean gets more reflective as you look at it from afar and more refractive when viewed close up.
+    </p>
+    <p class="text-center ExplanationText">
+        Or at least something similar.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/054.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Current reflective progress" id="OceanReflectiveTexture1I">
+    <label for="OceanReflectiveTexture1" class="ImageLabel2 text-center">Current reflective progress</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above is how it ended up looking.
+    </p>
+    <p class="text-center ExplanationText">
+        I like how it looks, but I chose to not use it for optimisation/performance.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/055.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Trying to create Noise with my Experience of GLSL" id="OceanHLSLNoise">
+    <label for="OceanHLSLNoise" class="ImageLabel2 text-center">Trying to create Noise with my Experience of GLSL</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        At this point I wanted to optimise my code.
+    </p>
+    <p class="text-center ExplanationText">
+        I used my Limited experience using GLSL and even smaller time with HLSL to create this one line of HLSL to create noise. I know it is possible to create different Noise's with pure Maths.
+    </p>
+    <p class="text-center ExplanationText">
+        However I am not that good with creating Noise with Maths yet, so I had to settle with this, my first line of Shader Code in unreal with the custom node.
+    </p>
+    <p class="text-center ExplanationText">
+        I did attempt to blur this noise for more interesting results, but it did not work out. Because I could not create interesting results with this,
+    </p>
+    <p class="text-center ExplanationText">
+        I decided to use Substance Designer to Make my own noise texture and RGB pack the texture instead.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/056.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of using Substance Designer to RGB Pack the Textures and create my own Noise" id="OceanSubstance">
+    <label for="OceanSubstance" class="ImageLabel2 text-center">Using Substance Designer</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I used Substance Designer to Not only create new Textures.
+    </p>
+    <p class="text-center ExplanationText">
+        According to my knowledge, Although Using the Alpha channel will make the file size bigger, it will also lower the Texture Sample's by Merging them into one.
+    </p>
+    <p class="text-center ExplanationText">
+        Which is the main thing that takes Shader Resources along with calculations, not file size.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/058.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Seeing the Material Shader Complexity and Overdraw" id="OceanShaderVision">
+    <label for="OceanShaderVision" class="ImageLabel2 text-center">Seeing the Material Shader Complexity and Overdraw</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I checked with the Shader Complexity and Overdraw Debug Vision and saw the Complexity was not too bad for the Masked version, but the Translucent one was extremely bad, in the white colour.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/059.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Changing the Noise Textures" id="OceanNoiseReplacement">
+    <label for="OceanNoiseReplacement" class="ImageLabel2 text-center">Changing the Noise Textures</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I changed the Noise Texture to the new one, actually choosing to change it to one of my new ones, This was useful mainly for the SunLight.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/060.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Adding Swirl Moise to the Normal Texture" id="OceanNormalNoise">
+    <label for="OceanNormalNoise" class="ImageLabel2 text-center">Adding Swirl Moise to the Normal Texture</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I Added Swirl Moise to the Normal Texture and used the Static Switch Mask parameter to add control of whether to keep or ignore the noise.
+    </p>
+    <p class="text-center ExplanationText">
+        This did add some calculations or something in the material Instance but in the Material it didn't add any calculations or texture samples.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/061.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of the Water without the Swirl Noise" id="OceanSwirlessNormal">
+    <label for="OceanSwirlessNormal" class="ImageLabel2 text-center">Water without the Swirl Noise</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above is how it looked prior to the Swirl Noise.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/062.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of the Water with the Swirl Noise" id="OceanSwirlNormal">
+    <label for="OceanSwirlNormal" class="ImageLabel2 text-center">Water with the Swirl Noise</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Above is how it looks with the Swirl Noise. It is quite hard to see from the image, but it gives the feeling of splotches of water without the wave normals.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/063.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Testing the Shader details for which parts cost the most" id="OceanOptimisation">
+    <label for="OceanOptimisation" class="ImageLabel2 text-center">Testing the Shader details for which parts cost the most</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I removed the elements (BC, Normal, etc.) one by one and saw which elements cost the most according to the stats at the bottom, and laid them out.
+    </p>
+    <p class="text-center ExplanationText">
+        At the bottom is the default Shader cost, and the ones in the comment (BPS for example is Base Pass Shader) (there is emissive and opacity costs commented out) are the ones that cost the most and how much they add to the overall shader to cost that much.
+    </p>
+</div>
+
+<div id="" class="row DownRABit2 ImgScaleMax2">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/064.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of Testing Houdini's ability to create Water Normal Textures" id="OceanHoudini1">
+    <label for="OceanHoudini1" class="ImageLabel2 text-center">Testing Houdini's ability to create Water Normal Textures</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        I wanted to test Houdini's ability to create water normal textures, Although I couldn't achieve a normal texture I was satisfied with, something that would look like this was still doable,
+    </p>
+    <p class="text-center ExplanationText">
+        I couldn't find anything online so if it was possible, I don't know a better way.
+    </p>
+    <p class="text-center ExplanationText">
+        What I did was create a Flip fluid sim with a tank and added some pop wind, then exported that as a mesh through the use of particle fluid surface.
+    </p>
+    <p class="text-center ExplanationText">
+        I then got the normals to be Cd through the Point Vop, changing the y and z colours around as that is not how normal textures are
+        normally taken, I then would have gotten a Camera and used Karma or Mantra to take the image.</p>
+    <p class="text-center ExplanationText">
+        The other method I thought of was to use lights to try to simulate normals, but I didn't attempt it.
+    </p>
+</div>
+
+<div id="" class="row DownRABit ImgScaleMax">
+    <img src="../public/Logo/Transparent.png" data-src="/Projects/01 Ocean/065.PNG" loading="lazy" class="ImgScale lazyload" alt="Image of the Point Vop" id="OceanPointVop">
+    <label for="OceanPointVop" class="ImageLabel text-center">Inside the Point Vop</label>
+</div>
+
+<div id="" class="row DownABit">
+    <p class="text-center ExplanationText">
+        Here is how the Point Vop worked. I just changed the Blue and Green Normals around as in Houdini Y is Unreal's version Z.
+    </p>
+</div>
+
+<%- include("./Partials/Footer.ejs")     %>
